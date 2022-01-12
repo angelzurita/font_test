@@ -1,18 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-
-import { UsersService } from '../../services/search';
+import { userService } from '../../services/user';
 
 @Component({
   selector: 'app-barra',
   templateUrl: './barra.component.html',
   styleUrls: ['./barra.component.css'],
+  providers: [userService]
 })
 export class BarChartComponent {
-
 
   userList: any = [];
 
@@ -67,18 +65,11 @@ export class BarChartComponent {
     console.log(event, active);
   }
 
-  getUser(input: any) {
-    console.log(input);
-    let item = input;
-    this.userService.getUser(item).subscribe(data => this.userList = data);
-  }
-
-  getFollowers(input: any) {
-
+  graficaFollowers(input: any) {
     console.log(input);
     let item = input;
 
-    this.userService.getUsers(item).subscribe(data => this.userList = data);
+    this.userServicios.getUsers(item).subscribe(data => this.userList = data);
 
     let usernames: any = [];
     let followers: any = [];
@@ -94,7 +85,7 @@ export class BarChartComponent {
 
 
         for (let i = 0; i < this.userList.items.length; i++) {
-          this.userService.getUser(usernames[i]).subscribe(data => followers.push(data));
+          this.userServicios.getUser(usernames[i]).subscribe(data => followers.push(data));
         }
 
       } else {
@@ -104,9 +95,11 @@ export class BarChartComponent {
         }
 
         for (let i = 0; i < 10; i++) {
-          this.userService.getUser(usernames[i]).subscribe(data => followers.push(data));
+          this.userServicios.getUser(usernames[i]).subscribe(data => followers.push(data));
         }
       }
+
+      alert("Espera un momento en lo que la grafica se actualiza");
 
       setTimeout(() => {
         console.log(followers);
@@ -147,17 +140,14 @@ export class BarChartComponent {
         }
       }
 
-        , 1000);
+        , 2000);
     }, 1000);
-
   }
 
-  constructor(private userService: UsersService) {
+  constructor(private userServicios: userService) {
   }
 
   ngOnInit(): void {
-
   }
-
 
 }

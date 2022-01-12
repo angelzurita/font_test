@@ -1,6 +1,6 @@
-// traer datos de api de git
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: "root"
@@ -8,18 +8,17 @@ import { HttpClient } from '@angular/common/http';
 export class UsersService {
 
   constructor(private http: HttpClient) {
-    
   }
+
+  apiUrl = "https://api.github.com/search/users?q=";
+  userList: any = [];
 
   getUsers(input: any) {
-    return this.http.get("https://api.github.com/search/users?q="+input);
+    let item = input;
+    return this.http.get<[]>(this.apiUrl + item).toPromise();
   }
 
-  getUser(id: any) {
-    return this.http.get("https://api.github.com/users/"+id);
-  }
-
-  getFollowers(id: any) {
-    return this.http.get("https://api.github.com/users/"+id+"/followers");
-  }
 }
+
+
+

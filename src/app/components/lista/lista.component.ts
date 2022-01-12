@@ -7,26 +7,26 @@ import { UsersService } from "../../services/search";
   styleUrls: ['./lista.component.css']
 })
 export class ListaComponent implements OnInit {
-  userList:any = [];
-  state: boolean = true;
 
-  validarInput(input: any) {
-    if (input.length > 0) {
-      this.state = false;
-    } else {
-      this.state = true;
-    }
-  }
-
-  getUsers(input: any) {
-    console.log(input);
-    let item = input;
-    this.userService.getUsers(item).subscribe(data => this.userList = data);
-  }
+  userList: any = [];
 
   constructor(private userService: UsersService) {
   }
 
   ngOnInit(): void {
+  }
+
+  userData(input: any) {
+    this.userService.getUsers(input).then(
+      (response: any) => {
+        // Success callback
+        console.log(response);
+        this.userList = response;
+      },
+      (error: any) => {
+        // Error callback
+        console.log(error);
+      }
+    );
   }
 }

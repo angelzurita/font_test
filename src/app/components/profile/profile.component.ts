@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from "../../services/search";
+import {userService} from "../../services/user";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   users: any = [];
 
-  constructor(private userService: UsersService, private _route: ActivatedRoute,
+  constructor(private userService: userService, private _route: ActivatedRoute,
     private _router: Router) {
 
   }

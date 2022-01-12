@@ -4,12 +4,11 @@
 </h2>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<input id="input" type="text" #input minlength="4" >
-
-<button mat-button mat-raised-button color="primary" 
-  (click)="getFollowers(input.value)" style="margin-left: 10px">Graficar</button>
-
+  <input id="input" type="text" #input minlength="4">
+  <button mat-button mat-raised-button color="primary"
+    (click)="graficaFollowers(input.value)" style="margin-left: 10px">Graficar</button>
 </div>
+<hr>
 
 <!-- SI HAY DATOS NO MOSTRAR -->
 
@@ -24,17 +23,17 @@
   </ul>
 </div>
 
+<div>
   <div>
-    <div>
-      <div style="display: block">
-        <canvas baseChart
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [type]="barChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
-        </canvas>
-      </div>
+    <div style="display: block">
+      <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+      </canvas>
     </div>
   </div>
+</div>
