@@ -18,4 +18,8 @@ export class UsersService {
   getUser(id: any) {
     return this.http.get("https://api.github.com/users/"+id);
   }
+
+  getFollowers(id: any) {
+    return this.http.get("https://api.github.com/users/"+id+"/followers");
+  }
 }

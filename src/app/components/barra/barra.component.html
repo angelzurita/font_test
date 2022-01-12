@@ -1,15 +1,39 @@
+
+<h2>
+  Grafica de Followers
+</h2>
+
+
+<input id="input" type="text" #input minlength="4">
+
+<button mat-button mat-raised-button color="primary" 
+  (click)="getFollowers(input.value)">Update</button>
+
+<!-- SI HAY DATOS NO MOSTRAR -->
+
 <div>
+  <ul *ngFor="let user of userList.items; let i=index">
+    <li *ngIf="i<10">
+      Username:
+      <a [routerLink]="['/perfil', user.login]">
+        {{user.login}} , User id: {{user.id}}
+      </a>
+    </li>
+  </ul>
+
+
   <div>
-    <div style="display: block">
-      <canvas baseChart
-        [data]="barChartData"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [type]="barChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
-      </canvas>
+    <div>
+      <div style="display: block">
+        <canvas baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [type]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
     </div>
-    <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
   </div>
 </div>

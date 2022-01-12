@@ -3,15 +3,11 @@
     <div class="example-button-row">
         <div class="example-flex-container">
             <button mat-icon-button color="primary" aria-label="Example icon
-                button with a home icon">
-                <mat-icon [routerLink]="['/lista']">format_list_bulleted</mat-icon>
-            </button>
-            <button mat-icon-button aria-label="Example icon button with a
-                vertical three dot icon">
-                <mat-icon [routerLink]="['/perfil']">assignment_ind</mat-icon>
+                button with a home icon" [routerLink]="['/lista']">Busqueda de Usuario
+                <mat-icon [routerLink]="['/lista']">format_list_bulleted</mat-icon> 
             </button>
             <button mat-icon-button color="accent" aria-label="Example icon
-                button with a menu icon">
+                button with a menu icon" [routerLink]="['/barra']">Grafica de Followers 
                 <mat-icon [routerLink]="['/barra']"> bar_chart</mat-icon>
             </button>
         </div>

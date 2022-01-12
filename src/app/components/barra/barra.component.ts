@@ -4,13 +4,18 @@ import { BaseChartDirective } from 'ng2-charts';
 
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
+import { UsersService } from '../../services/search';
+
 @Component({
   selector: 'app-barra',
   templateUrl: './barra.component.html',
-  styleUrls: ['./barra.component.css']
+  styleUrls: ['./barra.component.css'],
 })
 export class BarChartComponent {
-  
+
+
+  userList: any = [];
+
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public barChartOptions: ChartConfiguration['options'] = {
@@ -38,19 +43,18 @@ export class BarChartComponent {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [ 'seguidores '],
+    labels: ['seguidores '],
     datasets: [
-      { data: [ 65 ], label: 'Usuario 1' },
-      { data: [ 28 ], label: 'Usuario 2' },
-      { data: [ 28 ], label: 'Usuario 3' },
-      { data: [ 28 ], label: 'Usuario 4' },
-      { data: [ 28 ], label: 'Usuario 5' },
-      { data: [ 28 ], label: 'Usuario 6' },
-      { data: [ 28 ], label: 'Usuario 7' },
-      { data: [ 28 ], label: 'Usuario 8' },
-      { data: [ 28 ], label: 'Usuario 9' },
-      { data: [ 28 ], label: 'Usuario 10' }
-
+      { data: [0], label: 'Usuario 1' },
+      { data: [0], label: 'Usuario 2' },
+      { data: [0], label: 'Usuario 3' },
+      { data: [0], label: 'Usuario 4' },
+      { data: [0], label: 'Usuario 5' },
+      { data: [0], label: 'Usuario 6' },
+      { data: [0], label: 'Usuario 7' },
+      { data: [0], label: 'Usuario 8' },
+      { data: [0], label: 'Usuario 9' },
+      { data: [0], label: 'Usuario 10' }
     ]
   };
 
@@ -63,17 +67,97 @@ export class BarChartComponent {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40 ];
-
-    this.chart?.update();
+  getUser(input: any) {
+    console.log(input);
+    let item = input;
+    this.userService.getUser(item).subscribe(data => this.userList = data);
   }
+
+  getFollowers(input: any) {
+
+    console.log(input);
+    let item = input;
+
+    this.userService.getUsers(item).subscribe(data => this.userList = data);
+
+    let usernames: any = [];
+    let followers: any = [];
+
+    setTimeout(() => {
+      console.log(this.userList);
+
+      if (this.userList.items.length < 10) {
+
+        for (let i = 0; i < this.userList.items.length; i++) {
+          usernames.push(this.userList.items[i].login);
+        }
+
+
+        for (let i = 0; i < this.userList.items.length; i++) {
+          this.userService.getUser(usernames[i]).subscribe(data => followers.push(data));
+        }
+
+      } else {
+
+        for (let i = 0; i < 10; i++) {
+          usernames.push(this.userList.items[i].login);
+        }
+
+        for (let i = 0; i < 10; i++) {
+          this.userService.getUser(usernames[i]).subscribe(data => followers.push(data));
+        }
+      }
+
+      setTimeout(() => {
+        console.log(followers);
+        console.log(usernames);
+        // cambiar datos de barra por unsers
+        if (this.userList.items.length < 10) {
+
+          for (let i = 0; i < this.userList.items.length; i++) {
+            this.barChartData.datasets[i].label = usernames[i];
+          }
+
+          for (let i = 0; i < this.userList.items.length; i++) {
+            let followers_data = this.barChartData.datasets[i];
+            followers_data.data = [followers[i].followers];
+
+            if (this.userList.items.length < 10) {
+
+              let followers_data = this.barChartData.datasets[i];
+              followers_data.data = [followers[i].followers];
+            }
+          }
+          this.chart?.update();
+
+        } else {
+          if (this.userList.items.length > 10) {
+
+            for (let i = 0; i < 10; i++) {
+              this.barChartData.datasets[i].label = usernames[i];
+            }
+
+            for (let i = 0; i < 10; i++) {
+              let followers_data = this.barChartData.datasets[i];
+              followers_data.data = [followers[i].followers];
+            }
+            this.chart?.update();
+
+          }
+        }
+      }
+
+        , 1000);
+    }, 1000);
+
+  }
+
+  constructor(private userService: UsersService) {
+  }
+
+  ngOnInit(): void {
+
+  }
+
+
 }

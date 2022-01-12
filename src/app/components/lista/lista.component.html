@@ -1,15 +1,18 @@
+<div>
+
+  <h2>Busqueda de Usuario</h2>
 <input id= "input" type="text" #input minlength="4" >
 
-<button id="btn"  (click)="getUsers(input.value)">
+<button id="btn" (click)="getUsers(input.value)" >
     Buscar
 </button>
 
-<ul>
-  <li *ngFor="let user of userList.items.slice(0, 10)">
+<ul *ngFor="let user of userList.items; let i=index">
+  <li  *ngIf="i<11">
     Username:
-    <a [routerLink]="['/perfil', user.login]">
-      {{user.login}}
+    <a [routerLink]="['/perfil', user.login]" >
+      {{user.login}} , User id: {{user.id}}
     </a>
-    , User id: {{user.id}} 
-
   </li>
+</ul>
+</div>

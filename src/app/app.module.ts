@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { ListaComponent } from './components/lista/lista.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -47,7 +46,8 @@ import { ErrorComponent } from './components/error/error.component';
     MatTableModule,
     NgChartsModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
