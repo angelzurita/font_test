@@ -16,7 +16,7 @@
   <ul *ngFor="let user of userList.items; let i=index">
     <li *ngIf="i<10">
       Username:
-      <a [routerLink]="['/perfil', user.login]">
+      <a [routerLink]="['/perfil', user.login, user.score]">
         {{user.login}} , User id: {{user.id}}
       </a>
     </li>

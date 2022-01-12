@@ -10,8 +10,8 @@
 <ul *ngFor="let user of userList.items; let i=index">
   <li *ngIf="i<11">
 
-    <a [routerLink]="['/perfil', user.login]">
-      Username: {{user.login}} , User id: {{user.id}}
+    <a [routerLink]="['/perfil', user.login, user.score]">
+      Username: {{user.login}} , User id: {{user.id}}, Score: {{user.score}}
     </a>
   </li>
 </ul>

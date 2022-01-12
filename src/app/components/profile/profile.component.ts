@@ -13,16 +13,19 @@ export class ProfileComponent implements OnInit {
 
   users: any = [];
 
-  constructor(private userService: userService, private _route: ActivatedRoute,
+  constructor(private userService: userService, private route: ActivatedRoute,
     private _router: Router) {
 
   }
 
   ngOnInit(): void {
-    this._route.params.subscribe((params: Params) => {
+
+  // Agarramos el id del usuario
+    // let idUsuario = this.route.snapshot.paramMap.get("id");
+
+    this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.userService.getUser(this.id).subscribe(data => {
-        console.log(data);
         this.users = data;
       });
     });
