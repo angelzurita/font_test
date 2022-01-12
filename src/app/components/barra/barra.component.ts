@@ -115,7 +115,7 @@ export class BarChartComponent {
         if (this.userList.items.length < 10) {
 
           for (let i = 0; i < this.userList.items.length; i++) {
-            this.barChartData.datasets[i].label = usernames[i];
+            this.barChartData.datasets[i].label = followers[i].login;
           }
 
           for (let i = 0; i < this.userList.items.length; i++) {
@@ -134,7 +134,7 @@ export class BarChartComponent {
           if (this.userList.items.length > 10) {
 
             for (let i = 0; i < 10; i++) {
-              this.barChartData.datasets[i].label = usernames[i];
+              this.barChartData.datasets[i].label = followers[i].login;
             }
 
             for (let i = 0; i < 10; i++) {
