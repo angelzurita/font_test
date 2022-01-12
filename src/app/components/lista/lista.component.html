@@ -3,9 +3,8 @@
   <h2>Busqueda de Usuario</h2>
 <input id= "input" type="text" #input minlength="4" >
 
-<button id="btn" (click)="getUsers(input.value)" >
-    Buscar
-</button>
+<button mat-button mat-raised-button color="primary" 
+id="btn" (click)="getUsers(input.value)"  style="margin-left: 10px">Buscar</button>
 </div>
 
 <ul *ngFor="let user of userList.items; let i=index">
@@ -14,5 +13,5 @@
     <a [routerLink]="['/perfil', user.login]" >
       Username: {{user.login}} , User id: {{user.id}}
     </a>
-  </li>
+  </li> 
 </ul>
