@@ -22,6 +22,7 @@ export class GuardScoreGuard implements CanActivate {
     if (score >= 30) {
       return true;
     } else {
+      alert("El no se puede mostrar el perfil del usuario " + '"'+ id + '"' + " porque no tiene mas de 30 puntos");
       return false;
     }
 
