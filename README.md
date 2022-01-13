@@ -14,7 +14,7 @@ Ejecute `ng generar componente nombre-componente` para generar un nuevo componen
 
 ## Construir
 
-Ejecute `ng build` para compilar el proyecto. Los artefactos de compilación se almacenarán en el directorio `dist/`.
+Ejecute `ng build --prod --base-href="./"` para compilar el proyecto. Los artefactos de compilación se almacenarán en el directorio `dist/`.
 
 ## Ejecutando pruebas unitarias
 
